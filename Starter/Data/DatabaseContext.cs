@@ -20,6 +20,34 @@ namespace Starter.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Category>().HasData(
+                new Category(){
+                    CategoryId = 1,
+                    Name = "Category 1"
+                },
+                new Category(){
+                    CategoryId = 2,
+                    Name = "Category 2"
+                },
+                new Category(){
+                    CategoryId = 3,
+                    Name = "Category 3"
+                }
+            );
+
+            builder.Entity<Product>().HasData(
+                new Product(){
+                    ProductId = 1,
+                    ProductName = "product 1",
+                    Description = "This is a description",
+                    Price = 100.00m,
+                    Sn = "sn00001",
+                    Detail = "Here you go.",
+                    CategoryId = 1
+                }
+            );
+
+
 
             /*            builder.Entity<User>()
                             .HasData(new User
