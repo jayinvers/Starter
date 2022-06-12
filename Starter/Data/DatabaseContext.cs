@@ -17,63 +17,64 @@ namespace Starter.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
 
+        private List<Product> getProducts(int startNum, int endNum, int categoryId)
+        {
+            List<Product> products = new List<Product>();
+            for(int i = startNum; i < endNum; i++)
+            {
+                products.Add(new Product
+                {
+                    ProductId = i,
+                    ProductName = $"product {i}",
+                    Description = $"This is a description {i}",
+                    Price = 100.00m + i,
+                    Sn = $"sn0000{i}",
+                    Detail = $"{i} Here you go.",
+                    CategoryId = categoryId
+                });
+            }
+
+            return products;
+
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.Entity<Category>().HasData(
                 new Category(){
                     CategoryId = 1,
-                    Name = "Category 1"
+                    Name = "Women",
+                    Slug = "women",
+                    ParentId = 0
                 },
                 new Category(){
                     CategoryId = 2,
-                    Name = "Category 2"
+                    Name = "Men",
+                    Slug = "men",
+                    ParentId = 0
                 },
                 new Category(){
                     CategoryId = 3,
-                    Name = "Category 3"
+                    Name = "Kids",
+                    Slug = "kids",
+                    ParentId = 0
+                },
+                new Category()
+                {
+                    CategoryId = 4,
+                    Name = "Baby",
+                    Slug = "baby",
+                    ParentId = 0
                 }
+
             );
 
-            builder.Entity<Product>().HasData(
-                new Product(){
-                    ProductId = 1,
-                    ProductName = "product 1",
-                    Description = "This is a description",
-                    Price = 100.00m,
-                    Sn = "sn00001",
-                    Detail = "Here you go.",
-                    CategoryId = 1
-                }
-            );
-
-
-
-            /*            builder.Entity<User>()
-                            .HasData(new User
-                            {
-
-                                FirstName = "Admin",
-                                LastName = "Admin",
-                                Email = "admin@admin.com",
-                                ConcurrencyStamp = Guid.NewGuid().ToString()
-                            }, new User
-                            {
-                                ConcurrencyStamp = Guid.NewGuid().ToString()
-                            });
-                        builder.Entity<Role>()
-                        .HasData(new Role
-                        {
-
-                            Name = "Administrators",
-                            NormalizedName = "ADMINISTRATORS",
-                            ConcurrencyStamp = Guid.NewGuid().ToString()
-                        }, new Role
-                        {
-                            Name = "Users",
-                            NormalizedName = "USERS",
-                            ConcurrencyStamp = Guid.NewGuid().ToString()
-                        });*/
+            builder.Entity<Product>().HasData(getProducts(1,20,1));
+            builder.Entity<Product>().HasData(getProducts(20, 40, 2));
+            builder.Entity<Product>().HasData(getProducts(40, 60, 3));
+            builder.Entity<Product>().HasData(getProducts(60, 80, 4));
 
             builder.Entity<User>().ToTable("Users");
             

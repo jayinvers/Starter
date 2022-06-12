@@ -33,4 +33,8 @@
     <Folder Include="db\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\cart.js" />
+  </ItemGroup>
+
 </Project>

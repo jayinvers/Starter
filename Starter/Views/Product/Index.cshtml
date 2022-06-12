@@ -1,0 +1,14 @@
+﻿@model Starter.Models.Product
+
+@{
+    ViewData["Title"] = "Products";
+}
+<div class="fs-5">
+    <ul>
+        <li>@Model.ProductId</li>
+        <li>@Model.ProductName</li>
+        <li>@Model.Description</li>
+        <li>@Model.Price</li>
+    </ul>
+    <button class="btn btn-primary" id="addtocart" data-product-id="@Model.ProductId" data-product-name="@Model.ProductName" data-price="@Model.Price">ADD TO CART</button>
+</div>

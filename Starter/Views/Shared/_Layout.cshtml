@@ -10,20 +10,64 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Starter</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Categories" asp-route-slug="women">Women</a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Categories" asp-route-slug="men">Men</a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Categories" asp-route-slug="kids">Kids</a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Categories" asp-route-slug="baby">Baby</a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="About">About Us</a>
                         </li>
                     </ul>
+
+                    <a class="my-2 my-sm-0 text-light me-4" href="#">Sign in</a>
+
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart(0)</button>
+                        <div style="width:300px" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+
+                            <table id="cart" class="table">
+                                <thead>
+                                    <tr>
+                                 
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <div class="text-end mb-2">
+                                <a type="submit" class="btn btn-primary me-4" href="/cart">View Cart</a>
+                            </div>
+                            
+
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </nav>
     </header>
@@ -35,9 +79,22 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Starter - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - Starter -  <a class="text-dark" href="/Identity/Account/Register">Admin Register</a>
         </div>
     </footer>
+
+    <div class="toast-container position-fixed top-50 start-50 translate-middle p-5">
+        <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+
+                <strong class="me-auto">Message</strong>
+
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

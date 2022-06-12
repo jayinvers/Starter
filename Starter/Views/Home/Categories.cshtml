@@ -1,9 +1,8 @@
-﻿@model IEnumerable<Starter.Models.Product>
+﻿@model List<Starter.Models.Product>
 
-@{
-    ViewData["Title"] = "Products";
-}
-<div class="fs-5">
+
+<div class="Products">
+    <div class="fs-5">
     <ul>
         @foreach (var item in Model) {
         <li>
@@ -13,4 +12,5 @@
         </li>
 }
     </ul>
+</div>
 </div>
