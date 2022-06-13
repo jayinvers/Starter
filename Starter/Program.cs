@@ -25,7 +25,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-
     // Default Password settings.
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
@@ -41,17 +40,19 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
+
+if (app.Environment.IsDevelopment())
 {
-    var services = scope.ServiceProvider;
-    Starter.SeedData.Initialize(services).Wait();
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        Starter.SeedData.Initialize(services).Wait();
+    }
 }
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-
-
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
