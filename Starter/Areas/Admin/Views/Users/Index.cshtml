@@ -1,0 +1,27 @@
+﻿@model List<Starter.Models.User>
+
+@{
+    ViewData["Title"] = "Manage users";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>Users</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>User Name</td>
+            <td>Email</td>
+            <td>Phone Number</td>
+        </tr>
+    </thead>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>@user.PhoneNumber</td>
+        </tr>
+    }
+</table>

@@ -16,6 +16,7 @@ namespace Starter.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+       // public DbSet<Role> Roles { get; set; }
 
         private List<Product> getProducts(int startNum, int endNum, int categoryId)
         {

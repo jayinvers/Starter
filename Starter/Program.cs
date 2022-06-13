@@ -17,14 +17,15 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlite(Conn
 // var ConnectionString = builder.Configuration.GetConnectionString("DatabaseContextSqlserver");
 // builder.Services.AddDbContext<MyWebSiteContext>(options => options.UseSqlServer(ConnectionString));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
-/*    .AddRoles<Role>()*/
+builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DatabaseContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
+
     // Default Password settings.
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
@@ -33,17 +34,23 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 0;
 });
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = "Starter";
+    options.LoginPath = "/login";
+});
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    Starter.SeedData.Initialize(services).Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        var services = scope.ServiceProvider;
-        Starter.SeedData.Initialize(services);
-    }
+
 
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -68,6 +75,5 @@ app.UseEndpoints(endpoints =>
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-app.MapRazorPages();
 
 app.Run();

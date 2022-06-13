@@ -36,7 +36,7 @@ const updateCart = function () {
         $("#cart tbody").html("");
 
         $.each(myCart, function (index, item) {
-            $("#cart tbody").append(tr('<td>' + item.productName + "</td><td>" + item.quantity + '</td><td>$'+ item.quantity * item.price + '</td>'));
+            $("#cart tbody").append(tr('<td>' + item.productName + "</td><td class='text-center'>" + item.quantity + '</td><td>$'+ item.quantity * item.price + '</td>'));
         });
         $("#dropdownMenuButton").html("Cart(" + myCart.length + ")");
     }
