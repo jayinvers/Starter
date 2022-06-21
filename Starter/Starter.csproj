@@ -31,6 +31,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="db\" />
+    <Folder Include="Views\Auth\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,6 +27,11 @@ namespace Starter.Controllers
         {
             return View();
         }
+        [Route("/AccessDenied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
         [Route("/category/{slug}")]
         public async Task<IActionResult> Categories(string slug)

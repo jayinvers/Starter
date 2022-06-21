@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -40,8 +42,21 @@
                             <a class="nav-link text-light" asp-controller="Home" asp-action="About">About Us</a>
                         </li>
                     </ul>
-
-                    <a class="my-2 my-sm-0 text-light me-4" href="#">Sign in</a>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a class="my-2 my-sm-0 text-light me-4" href="/myprofile" >Hi @User.Identity?.Name</a>
+                        if(User.IsInRole("Administrator")){
+                            <a class="my-2 my-sm-0 text-light me-4" href="/Admin" >Admin Panel</a>
+                        }
+                        else{
+                            <a class="my-2 my-sm-0 text-light me-4" href="/logout" >Log out</a>
+                        }
+                    }
+                    else
+                    {
+                         <a class="my-2 my-sm-0 text-light me-4" href="/login">Sign in</a>
+                    }
+                   
 
                     <div class="dropdown">
                         <button class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart(0)</button>
