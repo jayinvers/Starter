@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Starter.Data;
 using Starter.Models;
@@ -11,16 +12,23 @@ namespace Starter.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly DatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger, DatabaseContext context)
+         private readonly UserManager<User> _userManager;
+
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context, UserManager<User>  userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            var databaseContext = _context.Products.Include(p => p.Category);
-            return View(await databaseContext.ToListAsync());
+            var products = _context.Products.Include(p => p.Category);
+
+            if(User.Identity.Name != null){
+                ViewBag.user = await _userManager.FindByNameAsync(User.Identity.Name);
+            }
+            return View(await products.ToListAsync());
         }
 
         public IActionResult About()

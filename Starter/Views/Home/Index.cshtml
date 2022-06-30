@@ -4,6 +4,9 @@
     ViewData["Title"] = "Products";
 }
 <div class="fs-5">
+    <div>
+        My Name: @ViewBag.user.Email
+    </div>
     <ul>
         @foreach (var item in Model) {
         <li>
